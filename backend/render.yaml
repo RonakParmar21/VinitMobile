@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: vinit-cctv-backend
+    env: python
+    region: singapore # Closest low-latency region to India / Surat
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: NEXTJS_WEBHOOK_URL
+        value: https://your-vercel-app.vercel.app/api/alerts
+      - key: WHATSAPP_TOKEN
+        sync: false
